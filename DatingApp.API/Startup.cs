@@ -43,6 +43,9 @@ namespace DatingApp.API
             });
             services.AddCors();
 
+            // Load config into a class
+            services.Configure<CloudinarySettings>(Configuration.GetSection("CloudinarySettings"));
+
             // Resolve with any class in our assembly
             services.AddAutoMapper(typeof(DatingRepository).Assembly);
 
@@ -96,6 +99,7 @@ namespace DatingApp.API
                 .AllowAnyOrigin()
                 .AllowAnyMethod()
                 .AllowAnyHeader()
+                // .AllowCredentials() <-- security issue
             );
 
             app.UseRouting();
