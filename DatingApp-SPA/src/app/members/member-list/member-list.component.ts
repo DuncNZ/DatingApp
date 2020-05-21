@@ -45,14 +45,12 @@ export class MemberListComponent implements OnInit {
   }
 
   loadUsers() {
-    console.log('loading users, max age: ' + this.userParams.maxAge);
     this.userService.getUsers(this.pagination.currentPage, this.pagination.itemsPerPage, this.userParams)
       .subscribe((res: PaginatedResult<User[]>) => {
       this.users = res.result;
       this.pagination = res.pagination;
     }, error => {
       this.alertifyService.error(error);
-    })
+    });
   }
-
 }
